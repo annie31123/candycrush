@@ -34,6 +34,7 @@ public:
 
     void reset();
     void setclickpicture();
+    void remove();
 
 
     int first[2],second[2];

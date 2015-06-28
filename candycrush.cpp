@@ -241,11 +241,19 @@ bool candycrush::checkall(int one[2],int two[2]){
     a=check3(one);
     a=check3(two);
    putzero();
-     while(canmove()){
+    while(canmove()){
+         remove();
          putzero();
 
      }
+     remove();
+    putzero();
+     for(int i=0;i<Row;i++)
+         for(int j=0;j<Col;j++)
+             objectarray[i][j]->setpicture();
+
     return a;
+
 }
 
 
@@ -362,8 +370,13 @@ void candycrush::putzero()
 
     for(int i=0;i<Row;i++)
         for(int j=0;j<Col;j++){
-            if(objectarray[i][j]->color==0)
+            if(objectarray[i][j]->color==0){
                 objectarray[i][j]->color=rand()%5+1;
+                if(j>=2&&objectarray[i][j]->color%10==objectarray[i][j-1]->color%10 &&objectarray[i][j]->color%10==objectarray[i][j-2]->color%10)
+                    j--;
+                if(i>=2&&objectarray[i][j]->color%10==objectarray[i-1][j]->color%10 && objectarray[i][j]->color%10==objectarray[i-2][j]->color%10)
+                    j--;
+            }
 
                 objectarray[i][j]->setpicture();
     }
@@ -418,32 +431,48 @@ bool candycrush::checkL(int a[2]){
 
 }
 bool candycrush::canmove(){
-    int a=false;
+
     for(int i=0;i<Row;i++)
         for(int j=0;j<Col-2;j++)
-            if(objectarray[i][j]->color%10==objectarray[i][j+1]->color%10&&objectarray[i][j]->color%10==objectarray[i][j+2]->color%10)
+            if(objectarray[i][j]->color!=0&&objectarray[i][j]->color%10==objectarray[i][j+1]->color%10&&objectarray[i][j]->color%10==objectarray[i][j+2]->color%10)
             {
-                objectarray[i][j]->color=0;
-                objectarray[i][j+1]->color=0;
-                objectarray[i][j+2]->color=0;
-
-                    score+=15;
-                a=true;
+                return true;
             }
 
     for(int j=0;j<Col;j++)
         for(int i=0;i<Col-2;i++)
-            if(objectarray[i][j]->color%10==objectarray[i+1][j]->color%10&&objectarray[i][j]->color%10==objectarray[i+2][j]->color%10)
+            if(objectarray[i][j]->color!=0&&objectarray[i][j]->color%10==objectarray[i+1][j]->color%10&&objectarray[i][j]->color%10==objectarray[i+2][j]->color%10)
             {
-                objectarray[i][j]->color=0;
-                objectarray[i+1][j]->color=0;
-                objectarray[i+2][j]->color=0;
 
-                    score+=15;
-                a=true;
+                return true;
             }
 
-    return a;
+    return false;
+}
+void candycrush::remove(){
+
+    for(int i=0;i<Row;i++)
+          for(int j=0;j<Col-2;j++)
+              if(objectarray[i][j]->color!=0&&objectarray[i][j]->color%10==objectarray[i][j+1]->color%10&&objectarray[i][j]->color%10==objectarray[i][j+2]->color%10)
+              {
+
+                  objectarray[i][j]->color=0;
+                  objectarray[i][j+1]->color=0;
+                  objectarray[i][j+2]->color=0;
+                  score+=15;
+              }
+
+      for(int j=0;j<Col;j++)
+          for(int i=0;i<Col-2;i++)
+              if(objectarray[i][j]->color!=0&&objectarray[i][j]->color%10==objectarray[i+1][j]->color%10&&objectarray[i][j]->color%10==objectarray[i+2][j]->color%10)
+              {
+                  objectarray[i][j]->color=0;
+                  objectarray[i+1][j]->color=0;
+                  objectarray[i+2][j]->color=0;
+
+                      score+=15;
+              }
+
 }
 
 bool candycrush::check4h(int a[2]){
