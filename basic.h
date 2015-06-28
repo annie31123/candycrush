@@ -4,8 +4,10 @@
 #include <QObject>
 #include <QPushButton>
 #include<Qstring.h>
-#define Row 9
-#define Col 9
+#include <QTime>
+
+#define Row 10
+#define Col 10
 
 class basic:public QObject
 {
@@ -13,32 +15,25 @@ class basic:public QObject
 public:
     explicit basic(QWidget *parent ,int i,int j);
     ~basic();
-    bool checkall();
-    bool check4();
-    bool check5();
-    bool checkL();
-    bool check3();
-
-    void breakspecial(int i,int j);
-
-    void break4v(int i,int j);
-    void break4h(int i,int j);
-    void break5(int i,int j);
-    void breakL(int i,int j);
-    int giveboardarray(int i,int j);
     QPushButton *button;
+
+    void setrandcolor();
+    void setpicture();
+
+    const int row;
+    const int col;
+    int color;
+    void operator -(basic *a);
+    void operator +(basic *a);
 signals:
-    void Click();
+    void Click(int,int);
 
 public slots:
     void click();
 private:
     //bool putzero[i][j];
 
-    const int row;
-    const int col;
     //int *Turn;
-
 
 };
 

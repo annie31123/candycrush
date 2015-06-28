@@ -1,0 +1,15 @@
+#ifndef FOUR_H
+#define FOUR_H
+#include "Destory.h"
+
+class four:public Destory
+{
+public:
+    four();
+    virtual ~four();
+    virtual condiction(basic *a[Row][Col],basic* focus);
+    virtual make(basic *a[Row][Col],basic* focus,int mode);
+    virtual boom(basic *a[Row][Col],basic* focus);
+};
+
+#endif // FOUR_H

@@ -1,11 +1,13 @@
 #include "candycrush.h"
+#include "start.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    candycrush w;
+    start w;
     w.show();
+
 
     return a.exec();
 }
