@@ -9,7 +9,7 @@
 #include <QTimer>
 #include <QString.h>
 
-#define SOEASY 2
+#define SOEASY 30
 #define MEDIUM 25
 #define Hard 20
 namespace Ui {
@@ -43,7 +43,8 @@ private slots:
     //void Time();
 
     void on_pushButton_clicked();
-
+signals:
+    void quit(int ,int);
 private:
     int score;
     int cont;

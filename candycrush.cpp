@@ -1,3 +1,4 @@
+
 #include "candycrush.h"
 #include "ui_candycrush.h"
 
@@ -33,6 +34,8 @@ void candycrush::Time(){
     --time;
 }
 */
+
+
 candycrush::~candycrush()
 {
     delete ui;
@@ -154,6 +157,17 @@ void candycrush::basicClick(int row,int col){
     ui->count->setText(B);
     o.score=score;
     if (cont==0){
+        int star=0;
+        if(score<1500)
+           star=0;
+        if(score>=1500&&score<2000)
+           star=1;
+        if(score>2000&&score<2500)
+            star=2;
+        if(score>2500)
+            star=3;
+        emit quit(star,score);
+
         if(score>=1500)
              o.game=1;
 
